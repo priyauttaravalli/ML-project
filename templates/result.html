@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <nav class="navbar navbar-expand-lg bg-success">
+        <a class="nav-brand text-white" href="/">
+            <h1><b>WasteClassify</b></h1>
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link text-white" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/env">Environmental Sustainability</a></li>
+            
+        </ul>
+    </nav>
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-body text-center">
+                <h3 class="card-title">Predicted Classification</h3>
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" height="360px" width="450px" alt="Uploaded Image">
+                {% if prediction == "Glass" %}
+                    <h2 class="mt-3" style="color:orange;">Battery<br><br>Orange bin</h2>
+                    <br><br><p>🔋 <b>Battery Recycling Instructions</b><br>
+                        (Use the Orange Bin 🟧)<br>
+                        
+                        <br><b>✅ What to Put in the Orange Bin:</b>
+                        <br>1.AA, AAA, C, D, 9V batteries (both rechargeable and non-rechargeable)
+                        
+                        <br>2.Button cell batteries (from watches, remotes, etc.)
+        
+                        <br>3.Mobile phone batteries
+                        
+                        <br>4.Laptop batteries
+                        
+                        <br>5.Power tool batteries
+                        
+                        <br><b>❌ Do NOT Put in the Orange Bin:</b>
+                        <br>1. Car batteries or large lead-acid batteries
+                        
+                        <br>2. Damaged or leaking batteries
+                        
+                        <br>3. Electronics or e-waste (like phones or laptops)
+                        
+                        <br>4. Loose wires or metal parts
+                        
+                        <br><b>⚠️ Safety Instructions:</b>
+                        <br>Tape the terminals of lithium or rechargeable batteries to prevent fire risk
+                        
+                        <br>Do not crush or puncture batteries
+                        
+                        <br>Place batteries in a plastic bag before disposing in the bin (especially button cells or damaged ones)
+                        
+                        <br>Keep the bin in a cool, dry place away from heat sources
+                        
+                        <br><b>♻️ Why Recycle Batteries?</b>
+                        <br>Prevent toxic chemicals (like lead, cadmium, mercury) from polluting the environment
+                        
+                        <br>Recover valuable materials like zinc, lithium, and cobalt
+                        
+                        <br>Reduce landfill waste and support sustainable practices</p>
+                {% elif prediction == "Plastic" %}
+                    <h2 class="mt-3" style="color:green;">Glass<br><br>Green bin</h2>
+                    <br><p><b>🧪 Glass Recycling Instructions</b>
+                        <br>(Use the Green Bin 🟩)
+                        
+                        <br><b>✅ What to Put in the Green Bin:</b>
+                        <br>1.Glass bottles (e.g., juice, soda, wine bottles)
+                        
+                        <br>2.Glass jars (e.g., sauce, jam, pickle jars)
+                        
+                        <br>3.Clear, green, and brown glass containers
+                        
+                        <br><b>❌ Do NOT Put in the Green Bin:</b>
+                        <br>1.Ceramics (cups, plates, tiles)
+                        
+                        <br>2.Mirrors or window glass
+                        
+                        <br>3.Light bulbs or tube lights
+                        
+                        <br>4.Heat-resistant glass (e.g., Pyrex)
+                        
+                        <br>5.Broken glass pieces (unless safely packed and allowed by your local guidelines)
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Rinse out containers to remove food or liquid residue
+                        
+                        <br>Remove lids or caps (recycle separately if metal or plastic)
+                        
+                        <br>Do not break the glass—keep it whole if possible
+                        
+                        <br>Place items gently to avoid shattering
+                        
+                        <br><b>♻️ Why Recycle Glass?</b>
+                        <br>100% recyclable without loss in quality
+                        
+                        <br>Saves energy and raw materials
+                        
+                        <br>Reduces pollution and landfill usage
+                        
+                        <br>One recycled glass bottle saves enough energy to power a computer for 30 minutes!
+                        
+                        </p>
+                {% elif prediction == "Trash" %}
+                    <h2 class="mt-3" style="color:yellow;">Clothes<br><br>Yellow bin</h2>
+                    <br><p><b>👕 Clothes Recycling Instructions</b>
+                        <br>(Use the Yellow Bin 🟨)
+                        
+                        <br><b>✅ What to Put in the Yellow Bin:</b>
+                        <br>1.Gently used clothes (shirts, pants, jackets, etc.)
+                        
+                        <br>2.Towels, bedsheets, blankets
+                        
+                        <br>3.Fabric scraps (clean and dry)
+                        
+                        <br>4.Shoes (if allowed, tie in pairs)
+                        
+                        <br><b>❌ Do NOT Put in the Yellow Bin:</b> 
+                        <br>Wet, moldy, or soiled clothes
+                        
+                        <br>Clothes contaminated with chemicals or paint
+                        
+                        <br>Underwear or socks (unless explicitly accepted)
+                        
+                        <br>Non-textile items (e.g., belts, hangers, plastic bags)
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br> Wash and dry clothes before recycling
+                        
+                        <br>Fold or roll items neatly
+                        
+                        <br>Place them in a clean, closed bag
+                        
+                        <br>Tie shoes together if included
+                        
+                        <br><b>♻️ Why Recycle Clothes?</b>
+                        <br>Reduces textile waste in landfills
+                        
+                        <br>Supports donation programs and second-hand use
+                        
+                        <br>Saves energy and resources needed to produce new fabric
+                        
+                        <br>Many items can be repurposed into insulation, rags, or new textiles</p>
+                {% elif prediction == "Shoes" %}
+                    <h2 class="mt-3" style="color:brown;">Biological<br><br>Brown bin</h2>
+                    <br><p><b>🍃 Biological Waste Recycling Instructions</b>
+                        <br>(Use the Brown Bin 🟫)
+                        
+                        <br><b>✅ What to Put in the Brown Bin:</b>
+                        <br> 1.Fruit and vegetable peels
+                        
+                        <br>2.Eggshells, tea leaves, coffee grounds
+                        
+                        <br>3.Leftover cooked food (without plastic/foil)
+                        
+                        <br>4.Garden waste (leaves, grass clippings, small branches)
+                        
+                        <br>5.Bread, rice, pasta
+                        
+                        <br> 6.Paper napkins and food-soiled paper
+                        
+                        <br><b>❌ Do NOT Put in the Brown Bin:</b>
+                        <br>1.Plastics, glass, or metals
+                        
+                        <br>2.Packaged/processed food with wrappers
+                        
+                        <br>3.Diapers, sanitary products
+                        
+                        <br>4.Meat, bones, or dairy (if not accepted in your local composting system)
+                        
+                        <br>5.Chemicals, oils, or synthetic materials
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Keep meat/dairy out unless your system allows it
+                        
+                        <br>Chop larger items to speed up decomposition
+                        
+                        <br>Use compostable liners if needed
+                        
+                        <br>Avoid too much liquid or oily waste
+                        
+                        <br><b>♻️ Why Recycle Biological Waste?</b>
+                        <br>Turns waste into nutrient-rich compost for gardening and farming
+                        
+                        <br>Reduces landfill load and methane gas emissions
+                        
+                        <br>Supports a circular, eco-friendly waste system
+                        
+                        <br>Helps improve soil health and reduce chemical fertilizer use</p>
+                {% elif prediction == "Metal" %}
+                    <h2 class="mt-3" style="color:blue;">Paper<br><br>Blue bin</h2>
+                    <br><p><b>📄 Paper Recycling Instructions</b>
+                        <br>(Use the Blue Bin 🟦)
+                        
+                        <br><b>✅ What to Put in the Blue Bin:</b>
+                        <br>1.Office paper (white, colored)
+                        
+                        <br>2.Newspapers and magazines
+                        
+                        <br>3.Notebooks (without plastic covers)
+                        
+                        <br>4.Paper envelopes (remove plastic windows if possible)
+                        
+                        <br>5.Paper packaging (non-coated)
+                        
+                        <br>6.Junk mail and flyers
+                        
+                        <br><b>❌ Do NOT Put in the Blue Bin:</b>
+                        <br>Tissues, paper towels, napkins
+                        
+                        <br>Greasy or food-stained paper (e.g., pizza boxes)
+                        
+                        <br>Laminated or wax-coated paper
+                        
+                        <br>Thermal paper (receipts)
+                        
+                        <br>Paper cups with plastic lining (unless accepted locally)
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Remove staples, clips, or bindings if possible
+                        
+                        <br>Keep paper dry and clean
+                        
+                        <br>Flatten paper items to save space
+                        
+                        <br>Do not shred paper unless required—shredded paper may not be recyclable in all areas
+                        
+                        <br><b>♻️ Why Recycle Paper?</b>
+                        <br>Saves trees, water, and energy
+                        
+                        <br>Reduces greenhouse gas emissions
+                        
+                        <br>Recycled paper can be turned into newspapers, boxes, tissues, and more
+                        
+                        <br>One ton of recycled paper saves about 17 trees and 7,000 gallons of water</p>
+                {% elif prediction == "Biological" %}
+                    <h2 class="mt-3" style="color:yellow;">Shoes<br><br>Yellow bin</h2>
+                    <br><p><b>👟 Shoe Recycling Instructions</b>
+                        <br>(Use the Yellow Bin 🟨)
+                        
+                        <br><b>✅ What to Put in the Yellow Bin:</b>
+                        <br>1.Gently used shoes (sneakers, sandals, boots, etc.)
+                        
+                        <br>2.Sports shoes and casual shoes
+                        
+                        <br>3.School shoes and formal shoes
+                        
+                        <br>4.Paired shoes (tie or rubber-band them together)
+                        
+                        <br>5.Shoes made primarily of leather, fabric, or rubber
+                        
+                        <br><b>❌ Do NOT Put in the Yellow Bin:</b>
+                        <br>1.Wet, moldy, or torn shoes
+                        
+                        <br>2.Single shoes (always recycle as a pair)
+                        
+                        <br>3.Shoes with batteries or electronics (e.g., light-up shoes)
+                        
+                        <br>4.High-heeled or spiked shoes (unless specified)
+                        
+                        <br>5.Shoes contaminated with oil, paint, or chemicals
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Clean and dry shoes before recycling
+                        
+                        <br>Tie laces together or place in a sealed bag to keep pairs intact
+                        
+                        <br>Remove mud, dirt, or debris
+                        
+                        <br>Avoid mixing with general or food waste
+                        
+                        <br><b>♻️ Why Recycle Shoes?</b>
+                        <br>Prevents thousands of tons of footwear from ending up in landfills
+                        
+                        <br>Many materials (rubber, foam, fabric) can be reused in making new shoes, playgrounds, or mats
+                        
+                        <br>Supports donation and reuse for communities in need
+                        
+                        <br>Reduces demand for raw materials and production energy</p>
+                {% elif prediction == "Cardboard" %}
+                    <h2 class="mt-3" style="color:yellow;">Plastic<br><br>Yellow bin</h2>
+                    <br><p><b>♳ Plastic Recycling Instructions</b>
+                        <br>(Use the Yellow Bin 🟨)
+                        
+                        <br><b>✅ What to Put in the Yellow Bin:</b>
+                        <br>1.Plastic bottles (water, soda, shampoo, detergent, etc.)
+                        
+                        <br>2.Food containers and tubs (yogurt, butter, etc.)
+                        
+                        <br>3.Plastic bags and wrappers (if accepted locally)
+                        
+                        <br>4.Plastic cutlery, plates, and cups (clean and dry)
+                        
+                        <br>5.Milk jugs, juice bottles
+                        
+                        <br>6.Plastic packaging materials (bubble wrap, stretch film — check local rules)
+                        
+                        <br><b>❌ Do NOT Put in the Yellow Bin:</b>
+                        <br>1.Dirty or greasy plastic (e.g., food-contaminated items)
+                        
+                        <br>2.Styrofoam or thermocol
+                        
+                        <br>3.PVC pipes, plastic furniture
+                        
+                        <br>4.Electronics or plastic with batteries
+                        
+                        <br>5.Plastic toys with metal parts or wires
+                        
+                        <br>6.Mixed-material packaging (like chip bags)
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Rinse containers to remove food residue
+                        
+                        <br>Flatten bottles to save space
+                        
+                        <br>Remove caps and labels if required by local rules
+                        
+                        <br>Keep the bin free of non-recyclable materials
+                        
+                        <br><b>♻️ Why Recycle Plastic?</b>
+                        <br>Reduces plastic pollution in landfills and oceans
+                        
+                        <br>Saves energy compared to producing new plastic
+                        
+                        <br>Recycled plastic is used to make clothing, benches, packaging, and more
+                        
+                        <br>Helps conserve petroleum resources used in plastic production</p>
+                {% elif prediction == "Clothes" %}
+                    <h2 class="mt-3" style="color:blue;">Cardboard<br><br>Blue bin</h2>
+                    <br><p><b>📦 Cardboard Recycling Instructions</b>
+                        <br> (Use the Blue Bin 🟦)
+                        
+                        <br><b>✅ What to Put in the Blue Bin:</b>
+                        <br>Corrugated cardboard boxes (shipping, moving boxes)
+                        
+                        <br>1.Cereal boxes and other food packaging (non-greasy)
+                        
+                        <br>2.Paperboard (toilet paper rolls, shoe boxes)
+                        
+                        <br>3.Packaging inserts (clean and dry)
+                        
+                        <br>4.Cardboard mailing tubes
+                        
+                        <br><b>❌ Do NOT Put in the Blue Bin:</b>
+                        <br>1.Wet, greasy, or food-soiled cardboard (e.g., pizza boxes)
+                        
+                        <br>2.Cardboard contaminated with oil, paint, or chemicals
+                        
+                        <br>3.Wax-coated or laminated cardboard
+                        
+                        <br>4.Cardboard with plastic windows (remove them before recycling)
+                        
+                        <br>5.Styrofoam or plastic packaging materials
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Flatten boxes to save space
+                        
+                        <br>Remove tape, labels, and staples if possible
+                        
+                        <br>Keep dry and clean
+                        
+                        <br>Don’t mix with non-paper items or food waste
+                        
+                        <br> <b>♻️ Why Recycle Cardboard?</b>
+                        <br>Saves trees, water, and energy
+                        
+                        <br>Reduces landfill waste and greenhouse gas emissions
+                        
+                        <br>Recycled cardboard is used to make new boxes, paperboard, and even building materials
+                        
+                        <br>One ton of recycled cardboard saves over 9 cubic yards of landfill space</p>
+                {% elif prediction == "Battery" %}
+                    <h2 class="mt-3" style="color:grey;">Trash<br><br>Grey bin</h2>
+                    <br><p><b>🗑️ Trash / Non-Recyclable Waste Instructions</b>
+                        <br> (Use the Grey Bin 🩶)
+                        
+                        <br><b>✅ What to Put in the Grey Bin:</b>
+                        <br>1.Contaminated or soiled packaging (e.g., greasy pizza boxes, oily food wrappers)
+                        
+                        <br>2.Broken ceramics or glassware (cups, plates – if not accepted in glass recycling)
+                        
+                        <br>3.Sanitary products (diapers, tissues, sanitary napkins)
+                        
+                        <br>4.Used cotton, bandages, or personal hygiene items
+                        
+                        <br>5.Vacuum cleaner bags, dust, and hair
+                        
+                        <br> 6.Small non-recyclable plastic or metal items
+                        
+                        <br><b>❌ Do NOT Put in the Grey Bin:</b>
+                        <br>1.Recyclable materials (plastic bottles, paper, glass, cardboard, metal)
+                        
+                        <br>2.Batteries or electronic waste
+                        
+                        <br>3.Hazardous waste (paint cans, chemicals, fluorescent bulbs)
+                        
+                        <br>4.Food waste (should go in the brown bin if composted)
+                        
+                        <br>5.Yard waste (should go in green or brown bin, depending on system)
+                        
+                        <br>6.Bag all trash properly to avoid spills
+                        
+                        <br>7.Avoid overfilling or packing sharp objects without wrapping
+                        
+                        <br>8.Do not mix recyclables into this bin
+                        
+                        <br>9.Keep the lid closed to avoid pests and odors
+                        
+                        <br><b>♻️ Why Segregate Trash Properly?</b>
+                        <br>Prevents contamination of recyclable materials
+                        
+                        <br>Helps landfill management and reduces harmful emissions
+                        
+                        <br>Supports proper handling and treatment of non-recyclables
+                        
+                        <br>Makes recycling efforts more efficient and less costly</p>
+                {% elif prediction == "Paper" %}
+                    <h2 class="mt-3" style="color:red;">Metal<br><br>Red bin</h2>
+                    <br><p><b>🧲 Metal Recycling Instructions</b>
+                        <br>(Use the Red Bin 🟥)
+                        
+                        <br><b>✅ What to Put in the Red Bin:</b>
+                        <br>1.Aluminum cans (soda, energy drinks)
+                        
+                        <br>2.Tin and steel cans (food cans, aerosol cans – empty and clean)
+                        
+                        <br>3.Metal lids and caps (from jars and bottles)
+                        
+                        <br>4.Foil and aluminum trays (clean, not greasy)
+                        
+                        <br>5.Small metal tools or utensils (if accepted by local rules)
+                        
+                        <br><b>❌ Do NOT Put in the Red Bin:</b>
+                        <br>1.Pressurized containers (gas cylinders, fire extinguishers)
+                        
+                        <br>2.Paint cans with leftover paint
+                        
+                        <br>3.Electronics or e-waste
+                        
+                        <br>4.Batteries (go in the orange bin)
+                        
+                        <br>5.Large scrap metal or wires (check with your local recycling center)
+                        
+                        <br><b>⚠️ Preparation Tips:</b>
+                        <br>Rinse containers to remove food or liquid residue
+                        
+                        <br>Crush cans to save space if allowed
+                        
+                        <br>Remove paper or plastic parts if easily separable
+                        
+                        <br>Do not mix with general waste or plastic
+                        
+                        <br><b>♻️ Why Recycle Metal?</b>
+                        <br>Conserves natural resources like bauxite and iron ore
+                        
+                        <br>Saves energy — recycling aluminum saves 95% of the energy needed to make new aluminum
+                        
+                        <br>Reduces landfill usage and pollution
+                        
+                        <br> Recycled metals are used in new cans, construction materials, electronics, and more</p>
+                {% else %}
+                    <h2 class="mt-3">Unknown Category</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
